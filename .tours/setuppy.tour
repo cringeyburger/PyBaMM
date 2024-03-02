@@ -1,0 +1,286 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "setup.py",
+  "steps": [
+    {
+      "file": "setup.py",
+      "description": "Here you are setting `default_lib_path`, which is empty for Windows and `~/.local` for Linux and macOS",
+      "line": 15
+    },
+    {
+      "file": "setup.py",
+      "description": "1. `VCPKG_ROOT_DIR` searches for root directory of VCPKG installation\n2. `VCPKG_DEFAULT_TRIPLET` specifies the architecture, OS and other details for which the packages should be built\n3. `VCPKG_FEATURE_FLAGS` specifies feature flags for `VCPKG` -> controls some features of `VCPKG`",
+      "line": 22
+    },
+    {
+      "file": "setup.py",
+      "description": "`build_ext` is a class of `setuptools` which helps in customizing the build process for C++ extension modules.",
+      "line": 39
+    },
+    {
+      "file": "setup.py",
+      "description": "The `user_options` class attribute adds custom command-line options for the `CMakeBuild` class. In this case, it includes options for specifying the source locations of suitesparse and sundials.",
+      "line": 40
+    },
+    {
+      "file": "setup.py",
+      "description": "The method initializes the custom options for suitesparse and sundials to `None`.",
+      "line": 46
+    },
+    {
+      "file": "setup.py",
+      "description": "It checks if `install` command (as like `make install` but here it is `python setup.py install` or `python setup.py bdist_wheel`). If `install` was given then it sets the `calling_cmd` to `install/bdist_wheel` to be used later when actually installing/building. After deciding that, it makes sure that the paths to those two extensions are set. If they are `None`, then they will get default paths:`os.path.join(default_lib_dir)`",
+      "line": 51
+    },
+    {
+      "file": "setup.py",
+      "description": "`setuptools` basically temporarily stores stuff in `build/temp.<linux/windows arch>/`, but `setuptools` in Windows creates two extra kid directories to `temp.*/<release or debug>`, so we want the temp folder so hence we take parent of those two children in Windows (to get `temp.*`)",
+      "line": 72
+    },
+    {
+      "file": "setup.py",
+      "description": "This method is the main entry for the build process.\n1. Sets up `CMake` configuration options, including build type, Python executable and whether to use Python `casadi`\n2. It then runs CMake to configure the build and subsequently builds `IDALKU` module\n3. The use of env variables related to `vcpkg` on windows is also handled.",
+      "line": 82
+    },
+    {
+      "file": "setup.py",
+      "description": "Checks if there are any \"extensions\" or not. If no, then it stops. **TODO** learn about extensions ",
+      "line": 83
+    },
+    {
+      "file": "setup.py",
+      "description": "Set for parallel building with the number of CPU count",
+      "line": 87
+    },
+    {
+      "file": "setup.py",
+      "description": "Disable Python `casadi` for Windows, otherwise install",
+      "line": 89
+    },
+    {
+      "file": "setup.py",
+      "description": "Here we define the arguments for CMake. *NOTE* the build type is  `PYBAMM_CPP_BUILD_TYPE`. If it is not set, then the default is `RELEASE` as given here",
+      "line": 94
+    },
+    {
+      "file": "setup.py",
+      "description": "Here we create the list of arguments. \n1. creating build type, default is `RELEASE`\n2. python executable set as `sys.executable`, which specifies the Python exec to be used by CMake\n3. whether `casadi` should be used or not, based on OS",
+      "line": 95
+    },
+    {
+      "file": "setup.py",
+      "description": "If path to `suitessparse` is found/default path is set, then append the argument with absolute path to the folder to `cmake_args`",
+      "line": 100
+    },
+    {
+      "file": "setup.py",
+      "description": "same as above, append `sundials` absolute path command to `cmake_args` if found/default path is set.",
+      "line": 104
+    },
+    {
+      "file": "setup.py",
+      "description": "set build directory. If `build/` doesn't exist, then make the folder",
+      "line": 107
+    },
+    {
+      "file": "setup.py",
+      "description": "`CMakeError.log` is generated when CMake encounters errors in the configure step. Hence delete the log before each re-write.",
+      "line": 115
+    },
+    {
+      "file": "setup.py",
+      "description": "Checks if `PYBAMM_USE_VCPKG` is set. If yes, then take the previously set `vcpkg` variables and add them to `build_env` dictionary.",
+      "line": 120
+    },
+    {
+      "file": "setup.py",
+      "description": "sets `cmake_list_dir` as the current script's absolute path.",
+      "line": 133
+    },
+    {
+      "file": "setup.py",
+      "description": "Print for aesthetics",
+      "line": 134
+    },
+    {
+      "file": "setup.py",
+      "description": "This command is for CMake configuration of the build\nRun the CMake process with:\n1. `cmake_list_dir` => CMakeLists.txt directory\n2. `*cmake_args` => cmake arguments\n3. `cwd` => current working directory\n4. `env` => sets env variables, including those related to vcpkg\n5. `check=True` => raises error if subprocess returns a non-zero exit code, indicating error while execution of `cmake` command",
+      "line": 135
+    },
+    {
+      "file": "setup.py",
+      "description": "check if errors were produced while configuration step. If yes, raise `RunTimeERROR`, otherwise build IDALKU module.",
+      "line": 142
+    },
+    {
+      "file": "setup.py",
+      "description": "Basically runs a loop over all the extensions it built, and moves them to target dic using `move_output` method below",
+      "line": 160
+    },
+    {
+      "file": "setup.py",
+      "description": "take the absolute path of `build_temp` (abs found through `.resolve()`) and give it to `build_temp`",
+      "line": 165
+    },
+    {
+      "file": "setup.py",
+      "description": "`dset_path` is the abs path, found out where the extension should be copied to.",
+      "line": 171
+    },
+    {
+      "file": "setup.py",
+      "description": "Here the path of the compiled extension module within the build directory is given to `source_path`",
+      "line": 172
+    },
+    {
+      "file": "setup.py",
+      "description": "find the `dest_directory` (use parents to avoid problem with vcpkg), if it doesn't exist, then create a dir ",
+      "line": 173
+    },
+    {
+      "file": "setup.py",
+      "description": "copy the compiled extension module from `build/temp` directory to destination dir `dist/`",
+      "line": 175,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 42
+        },
+        "end": {
+          "line": 1,
+          "character": 52
+        }
+      }
+    },
+    {
+      "file": "setup.py",
+      "description": "1. `%(asctime)s` -> time\n2. `%(name)s` -> name of the logger\n3. `%(levelname)s` -> level name -> INFO, WARNING, etc.\n4. `%(message)s` -> actual log message",
+      "line": 184
+    },
+    {
+      "file": "setup.py",
+      "description": "create new parent logger `PyBaMM setup`",
+      "line": 185
+    },
+    {
+      "file": "setup.py",
+      "description": "Setting level `INFO` or higher, `DEBUG` will be ignored",
+      "line": 188
+    },
+    {
+      "file": "setup.py",
+      "description": "path to `setup.log`",
+      "line": 191
+    },
+    {
+      "file": "setup.py",
+      "description": "setting handlers that logs should be written to `setup.log` ",
+      "line": 192
+    },
+    {
+      "file": "setup.py",
+      "description": "formatter is added to the handler",
+      "line": 194
+    },
+    {
+      "file": "setup.py",
+      "description": "handler is added to logger",
+      "line": 197
+    },
+    {
+      "file": "setup.py",
+      "description": "An additional informational message is logged using logger",
+      "line": 198
+    },
+    {
+      "file": "setup.py",
+      "description": "Format using the above style",
+      "line": 193
+    },
+    {
+      "file": "setup.py",
+      "description": "In this class, we create a subclass of `install` provided by `setuptools`. This class will be used when we pass `install` argument -> `python setup.py install` (will come at the end)",
+      "line": 201
+    },
+    {
+      "file": "setup.py",
+      "description": "Here we give `user options` as the custom command-line options for the user. *install.user_options allows `CustomInstall` to inherit the default options. the rest of the two allow for adding custom options -> paths to the two libraries",
+      "line": 204
+    },
+    {
+      "file": "setup.py",
+      "description": "we set the values of the custom options to none",
+      "line": 210
+    },
+    {
+      "file": "setup.py",
+      "description": "If the path is not given, then we finalise the paths to default ones",
+      "line": 215
+    },
+    {
+      "file": "setup.py",
+      "description": "now, we run the class. All of this happens when it called on.",
+      "line": 222
+    },
+    {
+      "file": "setup.py",
+      "description": "Here we create a custom class for binary dist. wheel from the original `bdist_wheel`. ",
+      "line": 229
+    },
+    {
+      "file": "setup.py",
+      "description": "here we add the original and custom options, which are paths to the required libraries",
+      "line": 232
+    },
+    {
+      "file": "setup.py",
+      "description": "intialise default options with default values, and set the custom values to None",
+      "line": 238
+    },
+    {
+      "file": "setup.py",
+      "description": "here we finalise options. If the paths are still None, then we set them to their default libraries",
+      "line": 243
+    },
+    {
+      "file": "setup.py",
+      "description": "Now we end with `run`",
+      "line": 250
+    },
+    {
+      "file": "setup.py",
+      "description": "We create a function which checks a series of conditions and decides whether to install the KLU module\n",
+      "line": 254
+    },
+    {
+      "file": "setup.py",
+      "description": "the conditions are as follows:\n1. CMake is found\n2. PyBind is found\n3. the system is not windows or the user doesn't have a system\n\nIf we find cmake and pybind, then we return their boolean values",
+      "line": 260
+    },
+    {
+      "file": "setup.py",
+      "description": "`idalku_ext` is an extention. The source files needed for this are packaged with PyBaMM and are defined here. NOTE: The source list should mirrir the list in `CMakeLists.txt`",
+      "line": 290,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 160
+        },
+        "end": {
+          "line": 1,
+          "character": 174
+        }
+      }
+    },
+    {
+      "file": "setup.py",
+      "description": "here we create a variable `ext_modules` to the `idalku_ext` extension only if the function `compile_KLU()` gives true (check above for conditions), otherwise its a empty list. ",
+      "line": 318
+    },
+    {
+      "file": "setup.py",
+      "description": "This is the crux of the file. This controls the operation.\n1. `include_package_data=True` sets to include the package data specified by the `Manifest.in` file or found in source control.\n2. `ext_modules=ext_modules` sets the ext. modules, i.e. KLU extension if conditions are met\n3.  `cmdclass` argument is used to specify custom command classes that extend or override the default behavior of setuptools commands.\n\nNow we have 3 custom commands which were defined in the above part of the file\n1. `build_ext` follows CMakeBuild class\n2. `bdist_wheel` follows bdist_wheel class\n3. `install` follows CustomInstall class",
+      "line": 322
+    }
+  ]
+}
