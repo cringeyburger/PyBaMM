@@ -1,0 +1,167 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "cmakelists",
+  "steps": [
+    {
+      "file": "CMakeLists.txt",
+      "description": "1. we set 3.13 as the minimum version\n2. CMP0074 is a policy which uses full path information for library dependencies to avoid confusion due to how relative paths are interpreted\n3. VERBOSE sets the verbose output during builing about each build step",
+      "line": 1
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "check if env(vcpkg_root_dir) is defined and if cmake's variable vcpkg_root_dir is not set.\nThen, set the variable to the env variable, and cache it so it can used for subsequent cmake builds.",
+      "line": 5
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "if vcpkg_root_dir is defined, then set the path to toolchain in CMAKE_TOOLCHAIN_FILE and cache it so other build runs can access it",
+      "line": 10
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "check if env(vcpkg_default_triplet) is defined and cmake's variable is not defined. Then\nset them equal and cache it so other build runs can use it",
+      "line": 15
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "set the name to idaklu",
+      "line": 20
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "set c++ standard to c++14",
+      "line": 22
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "set that the selected c++14 standard is REQUIRED",
+      "line": 23
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "set the compiler extensions off which are not part of the stardard",
+      "line": 24
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "this generates a `compile_commands.json` fiel which is useful for tools like `clangd` for code completion",
+      "line": 25
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "IMP: Enables the generation of position independent code. This is necessary for creating shared libraries",
+      "line": 26
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "if the compiler is not MSVC, then set `-Werror=vla` which treats variable length arrays as errors",
+      "line": 27
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "this helps in adding a compiler definition to the C++ compiler. \n`_GLIBCXX_USE_CXX11_ABI` is related to the application binary interface (ABI) used by GNU C++ standard library. ABI defines conventions such as how functions are called, objects are laid etc.\nWhen `GLIBCXX_USE_CXX11_ABI` is set to 1, then the new ABI (new C++11-compatible ABI) is used. When set to 0, it basically means to use old version of ABI will be used",
+      "line": 33
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "set pybind dir if not set",
+      "line": 35
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "we add pybind as a subdirectory",
+      "line": 39
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "the `pybind11_add_module` command is used to create a Python extension module named `idaklu` in c++, it binds the specified c++ source files to python, making them accessible as a python module.",
+      "line": 41,
+      "selection": {
+        "start": {
+          "line": 41,
+          "character": 1
+        },
+        "end": {
+          "line": 64,
+          "character": 2
+        }
+      }
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "If USE_PYTHON_CASADI is not defined by the user, we set the default value to TRUE ",
+      "line": 66
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "this command executes a pythong script using `${PYTHON_EXECUTABLE}` interpreter. \n1. -c means the following string is to be executed\n2. import importlib.utl -> importing stuff\n3. print(next(iter(importlib.util.find_spec('casadi').submodule_search_locations))) -> ..find_spec() is used to locate the import-related information for `casadi` module. Then it prints the first entry in the sibmodule locations.\n4. OUT_VARIABLE CASADI_DIR -> stores the output to casadi_dir\n5. OUTPUT_STRIP_TRIAILING_WHITESPACE -> trims trailing whitespace from the captured output\n6. Basically, it is used determine the dir of 'casadi' module in the python env, which is then stored in casadi_dir",
+      "line": 72
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "if casadi_dir is found, then change the path in the variable to CMake format, then print the message",
+      "line": 78
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "if USE_PYTHON_CASADI is true:\n1. a message will be printed\n2. cmake will try to find the CONFIG file of Pythonic Casadi package\n3. path is given and it is made sure that default system paths are not considered",
+      "line": 83
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "If USE_PYTHON_CASADI is false:\n1. Print message\n2. we ignore the pythonic casadi path\n3. then we try to find any casadi's CONFIG",
+      "line": 86
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "we are setting target idaklu's properties\n1. INSTALL_RPATH specifies a list of dirs to eb add to the install-time path of the target\n2. This property ensures that, when the idaklu module is installed, it will include the specified CasADi directory in its runtime library search path.\n3. INSTALL_RPATH_USE_LINK_PATH is a boolean property \n4. when set to true, this property used the value of CMAKE_INSTALL_RPATH during installation\n5. Basically, when idaklu installed, it will have an rpath that includes the casadi directory and the link path will be used to determine this rpath. This allows it to find the casadi libs during runtime",
+      "line": 92
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "this appends project_source_path to cmake_module_path. Done to include additional cmake modules (custom modules or modules from the source directory)",
+      "line": 98
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "tries to find sundials",
+      "line": 100
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "if found, it sets the sundials_include_dir and sundials_libraries variables. \nThis outputs a message indicating where sundials is found and the associates libraries",
+      "line": 101
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "adds sundials include dir to the include dirs of idalku target",
+      "line": 102
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "links idaklu target against sundials libs and casadi libs",
+      "line": 103
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "if vcpkg is installed, i.e. vcpkg_root_dir is defined, then find suitesparse config ",
+      "line": 108
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "if vcpkg is not installed/root_dir is not defined, then find it normally, and print its location",
+      "line": 110
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "inc_dir adds the include dir for the whole project",
+      "line": 114
+    },
+    {
+      "file": "CMakeLists.txt",
+      "description": "Here we link suitesparse lib to idaklu",
+      "line": 115
+    }
+  ],
+  "ref": "codetour"
+}

@@ -39,7 +39,7 @@
     },
     {
       "file": "setup.py",
-      "description": "This method is the main entry for the build process.\n1. Sets up `CMake` configuration options, including build type, Python executable and whether to use Python `casadi`\n2. It then runs CMake to configure the build and subsequently builds `IDALKU` module\n3. The use of env variables related to `vcpkg` on windows is also handled.",
+      "description": "This method is the main entry for the build process.\n1. Sets up `CMake` configuration options, including build type, Python executable and whether to use Python `casadi`\n2. It then runs CMake to configure the build and subsequently builds `idaklu` module\n3. The use of env variables related to `vcpkg` on windows is also handled.",
       "line": 82
     },
     {
@@ -109,7 +109,7 @@
     },
     {
       "file": "setup.py",
-      "description": "check if errors were produced while configuration step. If yes, raise `RunTimeERROR`, otherwise build IDALKU module.",
+      "description": "check if errors were produced while configuration step. If yes, raise `RunTimeERROR`, otherwise build idaklu module.",
       "line": 142
     },
     {
@@ -259,7 +259,7 @@
     },
     {
       "file": "setup.py",
-      "description": "`idalku_ext` is an extention. The source files needed for this are packaged with PyBaMM and are defined here. NOTE: The source list should mirrir the list in `CMakeLists.txt`",
+      "description": "`idaklu_ext` is an extention. The source files needed for this are packaged with PyBaMM and are defined here. NOTE: The source list should mirrir the list in `CMakeLists.txt`",
       "line": 290,
       "selection": {
         "start": {
@@ -274,7 +274,7 @@
     },
     {
       "file": "setup.py",
-      "description": "here we create a variable `ext_modules` to the `idalku_ext` extension only if the function `compile_KLU()` gives true (check above for conditions), otherwise its a empty list. ",
+      "description": "here we create a variable `ext_modules` to the `idaklu_ext` extension only if the function `compile_KLU()` gives true (check above for conditions), otherwise its a empty list. ",
       "line": 318
     },
     {
