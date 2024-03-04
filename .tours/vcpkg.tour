@@ -1,0 +1,17 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "vcpkg",
+  "steps": [
+    {
+      "file": "vcpkg.json",
+      "description": "adding name of project, version-string, dependencies\n",
+      "line": 2
+    },
+    {
+      "file": "vcpkg.json",
+      "description": "in dependencies, we have a direct dependency on casadi, and a dependency on a part of sundials.\n1. default-features = false -> disable default features\n2. use klu feature instead",
+      "line": 4
+    }
+  ],
+  "ref": "codetour"
+}
