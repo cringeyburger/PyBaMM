@@ -1,0 +1,12 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "vcpkg-config",
+  "steps": [
+    {
+      "file": "vcpkg-configuration.json",
+      "description": "use custom registries from PyBaMM for idaklu",
+      "line": 6
+    }
+  ],
+  "ref": "codetour"
+}
