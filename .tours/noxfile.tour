@@ -1,0 +1,122 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "noxfile",
+  "steps": [
+    {
+      "file": "noxfile.py",
+      "description": "set reuse existing virtualenvs to True",
+      "line": 8
+    },
+    {
+      "file": "noxfile.py",
+      "description": "set what sessions each platform can use:\n1. if linux/mac => precommit, pybamm-requires, unit\n2. if windows => precommit, unit",
+      "line": 9
+    },
+    {
+      "file": "noxfile.py",
+      "description": "1. gets homedir, used to construct paths below\n2. points sundials_install path to `~/.local`\n3. sets library path to `~/.local/lib`\n4. set to `scikits.odes` to exclude binary packages for `scikits.odes` during installation",
+      "line": 15
+    },
+    {
+      "file": "noxfile.py",
+      "description": "set virenv dir at `./venv`",
+      "line": 21
+    },
+    {
+      "file": "noxfile.py",
+      "description": "this function sets env variables for a nox session. ",
+      "line": 24
+    },
+    {
+      "file": "noxfile.py",
+      "description": "pybamm-requires session:\nif os != windows, then:\n1. install cmake, verbose\n2. run python script at `scripts/install_KLU_Sundials.py`\n3. check if pybind11 is installed or not, if not then git clone it from github",
+      "line": 40
+    },
+    {
+      "file": "noxfile.py",
+      "description": "1. set env_variables\n2. isntall coverage, and install setuptools (TEMPORARY FIX*)\n3. if not windows, and python > 3.12, then install in editable/dev mode with [all,dev,jax] dependencies\n4. if python < 3.12, then remove cached scikits.odees and install in edit/dev mode with [all,dev,jax,odes]\n5. if windows, and python < 3.9, then install in edit mode with [all,dev]\n6. if python > 3.9, then install in edit mode with [all,dev,jax]",
+      "line": 59
+    },
+    {
+      "file": "noxfile.py",
+      "description": "then, run `coverage run run-tests.py --no-sub`, then combine this daata and generate an XML report",
+      "line": 87
+    },
+    {
+      "file": "noxfile.py",
+      "description": "integration tests",
+      "line": 92
+    },
+    {
+      "file": "noxfile.py",
+      "description": "set env variables, TEMP FIX: install setuptools for py 3.12 CI",
+      "line": 95
+    },
+    {
+      "file": "noxfile.py",
+      "description": "run `python run-tests.py --integration`",
+      "line": 119
+    },
+    {
+      "file": "noxfile.py",
+      "description": "run doctests",
+      "line": 122
+    },
+    {
+      "file": "noxfile.py",
+      "description": "TEMP FIX for python 3.12 CI, install setuptools",
+      "line": 128
+    },
+    {
+      "file": "noxfile.py",
+      "description": "install in edit mode with [all,docs]",
+      "line": 129
+    },
+    {
+      "file": "noxfile.py",
+      "description": "run `python run-tests.py --doctest`",
+      "line": 130
+    },
+    {
+      "file": "noxfile.py",
+      "description": "unit tests",
+      "line": 133
+    },
+    {
+      "file": "noxfile.py",
+      "description": "run unit tests",
+      "line": 160
+    },
+    {
+      "file": "noxfile.py",
+      "description": "notebooks_to_test is list taken from the args given in cmdline. If none are provided, then set as empty list. ",
+      "line": 163
+    },
+    {
+      "file": "noxfile.py",
+      "description": "session.run(\"virtualenv\", os.fsdecode(VENV_DIR), silent=True) creates a virtual env with the specified dir",
+      "line": 188
+    },
+    {
+      "file": "noxfile.py",
+      "description": "python = os.fsdecode(VENV_DIR.joinpath(\"bin/python\")): Determines the path to the Python executable in the virtual environment.",
+      "line": 194
+    },
+    {
+      "file": "noxfile.py",
+      "description": "change dir to docs",
+      "line": 291
+    },
+    {
+      "file": "noxfile.py",
+      "description": "if session is in interactive, i.e. local dev, then \n1. sphinx-autobuild -> auto rebuild docs on changes\n2. -j auto -> auto determine the number of workers\n3. -qT suppress the output except for warnings and errors\n4. output dir is {envbindir}/../tmp/html",
+      "line": 293
+    },
+    {
+      "file": "noxfile.py",
+      "description": "if running in CI\n1. sphinx-build -> build documentation in html\n2. -b html  -> specifies output as html\n3. -W -> treats warnings as errors\n4. --keep-going -> continue the build after the first error",
+      "line": 306
+    }
+  ],
+  "ref": "codetour"
+}
