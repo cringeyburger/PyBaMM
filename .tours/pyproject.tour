@@ -1,0 +1,222 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "pyproject",
+  "steps": [
+    {
+      "file": "pyproject.toml",
+      "description": "specifies build system requirements and settings. Requires the following\n1. setuptools\n2. wheel\n3. casadi, only if the platform is not windows\n4. same with cmake\nand the build backend is setuptools'",
+      "line": 1
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "this section contains the metadata of the project",
+      "line": 14
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "requires min and max python version",
+      "line": 21
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the dependencies required by the project",
+      "line": 38
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "this section contains the urls related to the project",
+      "line": 48
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "this section contains optional dependencies like docs, examples, etc.",
+      "line": 55
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the optional dependencies for docs",
+      "line": 57
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the opt. dep. for examples",
+      "line": 76
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the opt. dep. for plot",
+      "line": 80
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the opt dep for cite",
+      "line": 88
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the opt dep for bpx (battery parameter exchange format..)",
+      "line": 92
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the opt dep for progress bars",
+      "line": 96
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the opt dep for dev",
+      "line": 100
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the opt dep for reading csv files",
+      "line": 117
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the opt dep for Jax solver",
+      "line": 121
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list the opt dep for scikit.odes solver",
+      "line": 126
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "contains all the opt dep except odes, jax and dev",
+      "line": 130
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "this section defines scripts that will be installed and made available for execution when the package is installed\ne.g. user can just do `pybamm_install_odes` in the terminal",
+      "line": 136
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "this section defines entry points for different parameter sets. Entry points are a way to specify and expose reusable python code, such as functions or classes in a package",
+      "line": 140
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "This section includes configuration options for setuptools.\n`include-package-data = true`: This line indicates that package data should be included. \nPackage data includes non-code files, such as text files, markdown files, CSV files, Python files, the CITATIONS.bib file, etc.",
+      "line": 159
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "This section specifies the list of files to include as package data. \nThese files will be included when building the distribution package (e.g., wheel or source distribution).",
+      "line": 166
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "This section configures the `find` attribute for locating packages. \nThe `include` attribute specifies which packages to include when searching for packages to include in the distribution.",
+      "line": 176
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "This includes the `pybamm` package and all its subpackages.",
+      "line": 177,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 20
+        },
+        "end": {
+          "line": 1,
+          "character": 26
+        }
+      }
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "This is for `ruff` tool. Add types of ipynb and exclude init files",
+      "line": 179
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "here we sent different linting options and rules for ruff. Each rule corresponds to a linting tool, like `flake8, pyupgrade etc.`",
+      "line": 184,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 107
+        },
+        "end": {
+          "line": 1,
+          "character": 129
+        }
+      }
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "these are the rules to ignore",
+      "line": 203
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "here you set which rules to ignore for which type of files",
+      "line": 221
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "This config file is for pytest ",
+      "line": 229
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "additional command-line options passed to pytest\ne.g. `-nauto` -> do not run any tests automatically",
+      "line": 236
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "defines style of console output for pytest",
+      "line": 246
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "when true, treats all xfail marked tests as strict",
+      "line": 247
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "basically which warnings to give. Also ignore warnings related to ResourceWarning",
+      "line": 248
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "difines the source directories to be considererd for coverage analysis",
+      "line": 262
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "enable multiprocessing",
+      "line": 263
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "ignore PP003 rule, which relates to listing wheela as a build dependency",
+      "line": 265
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "mypy ignores missing imports",
+      "line": 271
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "allows redefining names",
+      "line": 272
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "list of modules or module patters for which mypy overrides are defined",
+      "line": 276
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "specifies a specific error code to disable for the modules listed",
+      "line": 280
+    }
+  ],
+  "ref": "codetour"
+}
