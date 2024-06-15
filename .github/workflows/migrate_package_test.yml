@@ -40,12 +40,12 @@ jobs:
             yum -y install openblas-devel lapack-devel &&
             bash scripts/install_sundials.sh 6.0.3 6.5.0
           CIBW_BEFORE_BUILD_LINUX: python -m pip install cmake casadi scikit-build-core
-          CIBW_REPAIR_WHEEL_COMMAND_LINUX: 
+          CIBW_REPAIR_WHEEL_COMMAND_LINUX: |
             set -e -x
             wheel_file=$(basename {wheel})
             wheel_name="${wheel_file%.*}"
             mkdir -p temp_wheel_dir
-            unzip -d temp_wheel_dir {dest_dir}/$wheel_name.whl
+            unzip -d temp_wheel_dir {dest_dir}/$wheel_file
             tree temp_wheel_dir
         #   CIBW_TEST_COMMAND: |
         #     set -e -x
