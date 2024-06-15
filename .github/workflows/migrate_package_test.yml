@@ -45,15 +45,14 @@ jobs:
           CIBW_BEFORE_BUILD_LINUX: python -m pip install cmake casadi scikit-build-core
           CIBW_REPAIR_WHEEL_COMMAND_LINUX: |
             set -e -x
-            wheel_file=$(basename {wheel})
-            wheel_name="${wheel_file%.*}"
             mkdir -p temp_wheel_dir
             unzip -d temp_wheel_dir {wheel}
             yum install -y tree
             tree temp_wheel_dir
-        #  CIBW_TEST_COMMAND: |
-        #     set -e -x
-        #     python -c "import pybamm; print(pybamm.IDAKLUSolver())"
+            auditwheel repair -w {dest_dir} {wheel}
+          CIBW_TEST_COMMAND: |
+            set -e -x
+            python -c "import pybamm; print(pybamm.IDAKLUSolver())"
 
       - name: Upload wheels for Linux
         uses: actions/upload-artifact@v4
