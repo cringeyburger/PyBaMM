@@ -46,6 +46,7 @@ jobs:
             wheel_name="${wheel_file%.*}"
             mkdir -p temp_wheel_dir
             unzip -d temp_wheel_dir {wheel}
+            sudo apt install tree
             tree temp_wheel_dir
         #   CIBW_TEST_COMMAND: |
         #     set -e -x
