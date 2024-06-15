@@ -1,8 +1,7 @@
-import nox
 import os
 import sys
 from pathlib import Path
-
+import nox
 
 # Options to modify nox behaviour
 nox.options.default_venv_backend = "virtualenv"
@@ -67,7 +66,6 @@ def run_pybamm_requires(session):
 def run_coverage(session):
     """Run the coverage tests and generate an XML report."""
     set_environment_variables(PYBAMM_ENV, session=session)
-    session.install("setuptools", silent=False)
     session.install("coverage", silent=False)
     session.install("-e", ".[all,dev,jax]", silent=False)
     session.run("pytest", "--cov=pybamm", "--cov-report=xml", "tests/unit")
@@ -77,7 +75,6 @@ def run_coverage(session):
 def run_integration(session):
     """Run the integration tests."""
     set_environment_variables(PYBAMM_ENV, session=session)
-    session.install("setuptools", silent=False)
     session.install("-e", ".[all,dev,jax]", silent=False)
     session.run("python", "run-tests.py", "--integration")
 
@@ -85,9 +82,6 @@ def run_integration(session):
 @nox.session(name="doctests")
 def run_doctests(session):
     """Run the doctests and generate the output(s) in the docs/build/ directory."""
-    # TODO: Temporary fix for Python 3.12 CI.
-    # See: https://bitbucket.org/pybtex-devs/pybtex/issues/169/
-    session.install("setuptools", silent=False)
     session.install("-e", ".[all,dev,docs]", silent=False)
     session.run("python", "run-tests.py", "--doctest")
 
@@ -96,7 +90,6 @@ def run_doctests(session):
 def run_unit(session):
     """Run the unit tests."""
     set_environment_variables(PYBAMM_ENV, session=session)
-    session.install("setuptools", silent=False)
     session.install("-e", ".[all,dev,jax]", silent=False)
     session.run("python", "run-tests.py", "--unit")
 
@@ -105,7 +98,6 @@ def run_unit(session):
 def run_examples(session):
     """Run the examples tests for Jupyter notebooks."""
     set_environment_variables(PYBAMM_ENV, session=session)
-    session.install("setuptools", silent=False)
     session.install("-e", ".[all,dev]", silent=False)
     notebooks_to_test = session.posargs if session.posargs else []
     session.run("pytest", "--nbmake", *notebooks_to_test, external=True)
@@ -115,10 +107,6 @@ def run_examples(session):
 def run_scripts(session):
     """Run the scripts tests for Python scripts."""
     set_environment_variables(PYBAMM_ENV, session=session)
-    # Temporary fix for Python 3.12 CI. TODO: remove after
-    # https://bitbucket.org/pybtex-devs/pybtex/issues/169/replace-pkg_resources-with
-    # is fixed
-    session.install("setuptools", silent=False)
     session.install("-e", ".[all,dev]", silent=False)
     session.run("python", "run-tests.py", "--scripts")
 
@@ -133,7 +121,6 @@ def set_dev(session):
     # Temporary fix for Python 3.12 CI. TODO: remove after
     # https://bitbucket.org/pybtex-devs/pybtex/issues/169/replace-pkg_resources-with
     # is fixed
-    session.run(python, "-m", "pip", "install", "setuptools", external=True)
     session.run(
         python,
         "-m",
@@ -149,7 +136,6 @@ def set_dev(session):
 def run_tests(session):
     """Run the unit tests and integration tests sequentially."""
     set_environment_variables(PYBAMM_ENV, session=session)
-    session.install("setuptools", silent=False)
     session.install("-e", ".[all,dev,jax]", silent=False)
     session.run("python", "run-tests.py", "--all")
 
@@ -158,9 +144,6 @@ def run_tests(session):
 def build_docs(session):
     """Build the documentation and load it in a browser tab, rebuilding on changes."""
     envbindir = session.bin
-    # TODO: Temporary fix for Python 3.12 CI.
-    # See: https://bitbucket.org/pybtex-devs/pybtex/issues/169/
-    session.install("setuptools", silent=False)
     session.install("-e", ".[all,docs]", silent=False)
     session.chdir("docs")
     # Local development

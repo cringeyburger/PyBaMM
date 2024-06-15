@@ -19,6 +19,8 @@ endif()
 
 project(idaklu)
 
+find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
+
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -34,10 +36,12 @@ add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
 
 if(NOT PYBIND11_DIR)
   set(PYBIND11_DIR pybind11)
+  message("Setting up pybind11 dir here ")
 endif()
 
 add_subdirectory(${PYBIND11_DIR})
 # The sources list should mirror the list in setup.py
+message("Setting up idaklu module here ")
 pybind11_add_module(idaklu
   pybamm/solvers/c_solvers/idaklu/casadi_functions.cpp
   pybamm/solvers/c_solvers/idaklu/casadi_functions.hpp
@@ -83,6 +87,7 @@ endif()
 if(${USE_PYTHON_CASADI})
   message("Trying to link against Python casadi package")
   find_package(casadi CONFIG PATHS ${CASADI_DIR} REQUIRED NO_DEFAULT_PATH)
+  message("passed this casadi linking")
 else()
   message("Trying to link against any casadi package apart from the Python one")
   set(CMAKE_IGNORE_PATH "${CASADI_DIR}/cmake")
@@ -97,7 +102,9 @@ set_target_properties(
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR})
 # Sundials
+message("sundials finding now")
 find_package(SUNDIALS REQUIRED)
+message("sundials linking now")
 message("SUNDIALS found in ${SUNDIALS_INCLUDE_DIR}: ${SUNDIALS_LIBRARIES}")
 target_include_directories(idaklu PRIVATE ${SUNDIALS_INCLUDE_DIR})
 target_link_libraries(idaklu PRIVATE ${SUNDIALS_LIBRARIES} casadi)

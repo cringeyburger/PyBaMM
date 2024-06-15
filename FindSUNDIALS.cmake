@@ -42,7 +42,7 @@ find_path(SUNDIALS_INCLUDE_DIR
   PATHS
     ${SUNDIALS_ROOT}
   )
-
+message("found sundials root")
 set(SUNDIALS_WANT_COMPONENTS
   sundials_idas
   sundials_sunlinsolklu
@@ -53,7 +53,7 @@ set(SUNDIALS_WANT_COMPONENTS
   sundials_nvecserial
   sundials_nvecopenmp
   )
-
+message("set sundials want components")
 # find the SUNDIALS libraries
 foreach(LIB ${SUNDIALS_WANT_COMPONENTS})
     if (UNIX AND SUNDIALS_PREFER_STATIC_LIBRARIES)
@@ -83,12 +83,13 @@ foreach(LIB ${SUNDIALS_WANT_COMPONENTS})
     endif()
     mark_as_advanced(SUNDIALS_${LIB}_LIBRARY)
 endforeach()
-
+message("found sundials libraries ${SUNDIALS_ROOT}")
 mark_as_advanced(
     SUNDIALS_LIBRARIES
     SUNDIALS_INCLUDE_DIR
 )
 
+message("dont know what this means")
 # behave like a CMake module is supposed to behave
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(

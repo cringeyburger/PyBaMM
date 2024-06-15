@@ -12,6 +12,7 @@ from setuptools.command.install import install
 from setuptools.command.build_ext import build_ext
 
 
+
 default_lib_dir = (
     "" if system() == "Windows" else os.path.join(os.getenv("HOME"), ".local")
 )
