@@ -45,7 +45,7 @@ jobs:
             wheel_file=$(basename {wheel})
             wheel_name="${wheel_file%.*}"
             mkdir -p temp_wheel_dir
-            unzip -d temp_wheel_dir {dest_dir}/$wheel_file
+            unzip -d temp_wheel_dir {wheel}
             tree temp_wheel_dir
         #   CIBW_TEST_COMMAND: |
         #     set -e -x
