@@ -156,7 +156,7 @@ include = [
 ]
 
 [tool.scikit-build.wheel]
-packages = ["pybamm", "pybamm.*", "install", "install.*"]
+packages = ["pybamm", "pybamm.*"]
 expand-macos-universal-tags = true
 license-files = ["LICENSE.txt"]
 
