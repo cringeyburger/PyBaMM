@@ -36,12 +36,12 @@ jobs:
         run: pipx run cibuildwheel --output-dir wheelhouse
         env:
           CIBW_ARCHS_LINUX: x86_64
-          # CIBW_BEFORE_ALL_LINUX: >
-          #   yum -y install openblas-devel lapack-devel &&
-          #   bash scripts/install_sundials.sh 6.0.3 6.5.0
           CIBW_BEFORE_ALL_LINUX: >
             yum -y install openblas-devel lapack-devel &&
-            python scripts/install_KLU_Sundials.py
+            bash scripts/install_sundials.sh 6.0.3 6.5.0
+          # CIBW_BEFORE_ALL_LINUX: >
+          #   yum -y install openblas-devel lapack-devel &&
+          #   python scripts/install_KLU_Sundials.py
           CIBW_BEFORE_BUILD_LINUX: python -m pip install cmake casadi scikit-build-core
           CIBW_REPAIR_WHEEL_COMMAND_LINUX: |
             set -e -x
