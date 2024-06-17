@@ -34,6 +34,8 @@ endif()
 # casadi seems to compile without the newer versions of std::string
 add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
 
+set(PYBIND11_FINDPYTHON ON)
+
 if(NOT PYBIND11_DIR)
   set(PYBIND11_DIR pybind11)
   message("Setting up pybind11 dir here ")

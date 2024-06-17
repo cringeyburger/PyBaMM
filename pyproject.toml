@@ -139,11 +139,13 @@ MSMR_Example = "pybamm.input.parameters.lithium_ion.MSMR_example_set:get_paramet
 [tool.scikit-build]
 minimum-version = "0.8"
 build-dir = "build/{wheel_tag}"
+install.components = ["python", "docs", "examples"]
 
 [tool.scikit-build.cmake]
 version = ">=3.13"
 build-type = "Release"
 verbose = true
+targets = ["idaklu"]
 
 [tool.scikit-build.sdist]
 include = [
@@ -159,6 +161,8 @@ include = [
 packages = ["pybamm", "pybamm.*"]
 expand-macos-universal-tags = true
 license-files = ["LICENSE.txt"]
+install-dir = "pybamm/solvers/c_solvers"
+py-api = "py3"
 
 
 # # by default builds are reproducible https://scikit-build-core.readthedocs.io/en/latest/configuration.html#configuring-source-file-inclusion
