@@ -139,7 +139,7 @@ MSMR_Example = "pybamm.input.parameters.lithium_ion.MSMR_example_set:get_paramet
 [tool.scikit-build]
 minimum-version = "0.8"
 build-dir = "build/{wheel_tag}"
-install.components = ["python", "docs", "examples"]
+#install.components = ["python", "docs", "examples"]
 
 [tool.scikit-build.cmake]
 version = ">=3.13"
